@@ -1,0 +1,12 @@
+<h3>以下の内容で投稿します。</h3>
+<%= form_for(@tweet) do |f| %>
+  <%= f.hidden_field :content %>
+
+  <p>本文:<%= @tweet.content %></p>
+  <%= f.submit "投稿する" %>
+<% end %>
+
+<%= form_for(@tweet, url: tweets_path, method: 'get') do |f| %>
+  <%= f.hidden_field :content %>
+  <%= f.submit "戻る", name: 'back' %>
+<% end %>

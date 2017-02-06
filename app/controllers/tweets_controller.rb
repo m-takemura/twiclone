@@ -1,32 +1,54 @@
 class TweetsController < ApplicationController
+  before_action :set_tweet, only:[:edit, :update, :destroy]
+  
   def index
     @tweets = Tweet.order("created_at desc")
-    @tweet = Tweet.new
+    if params[:back]
+      @tweet = Tweet.new(tweets_params)
+    else
+      @tweet = Tweet.new
+    end
   end
   
   def create
-    Tweet.create(tweets_params)
-    redirect_to tweets_path ,notice: "ツイートを投稿しました。"
+    # Tweet.create(tweets_params)
+    # redirect_to tweets_path ,notice: "ツイートを投稿しました。"
+    @tweet = Tweet.new(tweets_params)
+    if @tweet.save
+      redirect_to tweets_path ,notice: "ツイートを投稿しました。"
+    else
+      render 'edit'
+    end
   end
   
   def edit
-    @tweet = Tweet.find(params[:id])
   end
   
   def update
-    @tweet = Tweet.find(params[:id])
-    @tweet.update(tweets_params)
-    redirect_to tweets_path, notice: "ツイートを編集しました。"
+    if @tweet.update(tweets_params)
+      redirect_to tweets_path, notice: "ツイートを編集しました。"
+    else
+      render 'edit'
+    end
   end
   
   def destroy
-    @tweet = Tweet.find(params[:id])
     @tweet.destroy
     redirect_to tweets_path, notice: "ツイートを削除しました。"
+  end
+  
+  def confirm
+    @tweet=Tweet.new(tweets_params)
+    render :edit if @tweet.invalid?
   end
   
   private
     def tweets_params
       params.require(:tweet).permit(:content)
+    end
+    
+    #idをキーとしてレコードを取得する
+    def set_tweet
+      @tweet=Tweet.find(params[:id])
     end
 end
