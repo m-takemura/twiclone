@@ -1,3 +1,55 @@
 // Place all the styles related to the tweets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.wrapper {
+  margin-bottom: 74px;
+//   padding: 20px 20px 20px 35px;
+  .row {
+    // border : 1px solid #ccc;
+    padding: 20px;
+    text-align: left;
+    word-wrap: break-word;
+  }
+  
+  .tweet-block{
+    border-top : 1px solid #ccc;
+  }
+}
+
+.timeline{
+    margin:0px;
+    padding:15px;
+    border : 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="submit"].btn-block{
+  margin: 15px 0;
+}
+
+.container{
+  padding-bottom: 85px;
+}
+
+textarea{
+    width: 100%;
+}
+
+.profile-card{
+    padding: 5px;
+    border : 1px solid #ccc;
+    border-radius: 5px;
+
+    .user-name{
+        font-size: x-large;
+    }
+    .profile-status{
+        .title{
+            font-size: small;
+        }
+        .count{
+            font-size: x-large;
+        }
+    }    
+}

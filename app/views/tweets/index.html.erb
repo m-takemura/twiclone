@@ -1,18 +1,44 @@
 <!--<h1>Tweets#index</h1>-->
 <!--<p>Find me in app/views/tweets/index.html.erb</p>-->
-<p><%= notice %></p>
-
-<%= form_for(@tweet, url: confirm_tweets_path) do |f| %>
-    <%= f.label "本文" %>
-    <br>
-    <%= f.text_area :content, :maxlength => "255" %>
-    <br>
-    <%= f.submit %>
-<% end %>
-
-<% @tweets.each do |tweet| %>
-    <!--<p><%= tweet.created_at.strftime("%Y-%m-%d %H:%M") %></p>-->
-    <p><%= tweet.content %></p>
-    <%= link_to "編集", edit_tweet_path(tweet.id), class: 'btn btn-default btn-sm btn-success' %>
-    <%= link_to '削除', tweet_path(tweet.id), method: :delete, data: {confirm: '本当に削除してよろしいですか？'}, class: 'btn btn-default btn-sm btn-danger' %>
-<% end %>
+<div class="container">
+    <div class="wrapper col-md-3 col-sm-3 hidden-xs">
+        <p></p>
+        <div class="profile-card">
+            <span class="user-name">
+                @username
+            </span>
+            <br><br>
+            <span class="profile-status">
+                <span class="title">ツイート</span>
+                <br>
+                <span class="count"><%= @tweets.count %></span>
+            </span>
+        </div>
+    </div>
+    <div class="wrapper col-md-6 col-sm-9">
+        <p class="text-center"><%= notice %></p>
+        <div class="timeline">
+            <div class="row">
+                <%= form_for(@tweet, url: confirm_tweets_path) do |f| %>
+                    <%= f.text_area :content, class:"form-control" %>
+                    <br>
+                    <%= f.submit "ツイート", class:"btn btn-default btn-sm btn-primary pull-right"%>
+                <% end %>
+            </div>
+            <% @tweets.each do |tweet| %>
+                <!--<p><%= tweet.created_at.strftime("%Y-%m-%d %H:%M") %></p>-->
+                <div class="row tweet-block">
+                        <!--<p><%= tweet.content %></p>-->
+                        <p><%= simple_format(tweet.content) %></p>
+                        <div class="right">
+                            <%= link_to "編集", edit_tweet_path(tweet.id), class: 'btn btn-default btn-sm btn-success pull-right' %>
+                            <%= link_to '削除', tweet_path(tweet.id), method: :delete, data: {confirm: '本当に削除してよろしいですか？'}, class: 'btn btn-default btn-sm btn-danger pull-right' %>
+                        </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <!--<div class="wrapper col-md-3 hidden-sm hidden-xs">-->
+        
+    <!--</div>-->
+</div>
