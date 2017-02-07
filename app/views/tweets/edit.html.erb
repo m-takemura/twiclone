@@ -16,5 +16,10 @@
       <br>
       <%= f.submit "ツイート", class:'btn btn-default btn-sm btn-primary pull-right' %>
   <% end %>
-  <%= link_to "戻る", tweets_path, class: 'btn btn-default btn-sm btn-success' %>
+  <!--<%= link_to "戻る", tweets_path, class: 'btn btn-default btn-sm btn-success' %>-->
+  <%= form_for(@tweet, url: tweets_path, method: 'get') do |f| %>
+    <%= f.hidden_field :content %>
+    <%= f.submit "戻る",  class: 'btn btn-default btn-sm btn-success', name: choose_new_or_edit %>
+  <% end %>
+  
 </div>
